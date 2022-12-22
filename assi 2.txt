@@ -14,6 +14,10 @@ print(c)
 x=slice(0,35,2)
 print(sen[x])
 
+#d
+replace=sen.replace("a case sensitive","object oriented")
+print(replace)
+
 #e
 sen='Python is a case sensitive language'
 print(sen.index('g',0,35))
