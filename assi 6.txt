@@ -1,0 +1,187 @@
+#Q1
+
+def is_perfect(num):
+    divisors = []
+    # find divisors of the given number
+    for i in range(1, num):
+        if num % i == 0:
+            divisors.append(i)
+    # check if the sum of divisors equal to the given number
+    if sum(divisors) == num:
+        return True
+    return False
+
+# test the function
+print(is_perfect(6)) # True
+print(is_perfect(28)) # True
+print(is_perfect(496)) # True
+print(is_perfect(8128)) # True
+print(is_perfect(5)) # False
+
+
+#Q2
+
+def is_palindrome(string):
+    # reverse the string
+    rev_str = string[::-1]
+    # check if the original string and reversed string are same or not
+    if string == rev_str:
+        return True
+    else:
+        return False
+
+# test the function
+a=input('Enter your string: ')
+print(is_palindrome(a))
+
+#Q3
+
+def pascal_triangle(n):
+    # create an empty list to store the current row
+    current_row = [1]
+    # print the first row
+    print(current_row)
+    # loop through the remaining rows
+    for i in range(1, n):
+        # create a new row with the previous row
+        previous_row = current_row
+        current_row = [1]
+        for j in range(1, i):
+            current_row.append(previous_row[j-1] + previous_row[j])
+        current_row.append(1)
+        # print the current row
+        print(current_row)
+
+# test the function
+pascal_triangle(6)
+
+#Q4
+
+def is_pangram(string):
+    alphabet = "abcdefghijklmnopqrstuvwxyz"
+    string = string.lower()
+    for char in alphabet:
+        if char not in string:
+            return False
+    return True
+
+# test the function
+print(is_pangram("The quick brown fox jumps over the lazy dog")) # True
+print(is_pangram("This is not a pangram")) # False
+
+#Q5
+
+def sort_words(sentence):
+    # split the sentence into words
+    words = sentence.split("-")
+    # sort the words
+    words.sort()
+    # join the sorted words with a hyphen
+    sorted_sentence = "-".join(words)
+    # print the sorted sentence
+    print(sorted_sentence)
+
+# test the function
+sort_words("green-red-yellow-black-white")
+
+#Q6
+
+def student_data(student_id, student_name=None, student_class=None):
+    # print the student id
+    print(f'Student ID: {student_id}')
+    # check if student name and class are provided
+    if student_name and student_class:
+        print(f'Student Name: {student_name}')
+        print(f'Student Class: {student_class}')
+
+# test the function
+student_data(123)
+student_data(123, student_name='John', student_class='10th')
+
+#Q7
+
+class Student:
+    pass
+
+class Marks:
+    pass
+
+# create instances of Student and Marks classes
+student1 = Student()
+marks1 = Marks()
+
+# check if the instances are of the respective classes
+print(isinstance(student1, Student)) # True
+print(isinstance(marks1, Marks)) # True
+
+# check if the classes are subclasses of the object class
+print(issubclass(Student, object)) # True
+print(issubclass(Marks, object)) # True
+
+#Q8
+
+class SumToZero:
+    def __init__(self, numbers):
+        self.numbers = numbers
+        
+    def find_triplets(self):
+        triplets = []
+        self.numbers.sort()
+        for i in range(len(self.numbers)-2):
+            if i > 0 and self.numbers[i] == self.numbers[i-1]:
+                continue
+            l = i + 1
+            r = len(self.numbers) - 1
+            while l < r:
+                s = self.numbers[i] + self.numbers[l] + self.numbers[r]
+                if s > 0:
+                    r -= 1
+                elif s < 0:
+                    l += 1
+                else:
+                    triplets.append([self.numbers[i], self.numbers[l], self.numbers[r]])
+                    while l < r and self.numbers[l] == self.numbers[l+1]:
+                        l += 1
+                    while l < r and self.numbers[r] == self.numbers[r-1]:
+                        r -= 1
+                    l += 1
+                    r -= 1
+        return triplets
+
+# test the class
+numbers = [-25, -10, -7, -3, 2, 4, 8, 10]
+print(SumToZero(numbers).find_triplets()) # [[-10, 2, 8], [-7, -3, 10]]
+
+
+#Q9
+
+class ParenthesesValidator:
+    def __init__(self, string):
+        self.string = string
+        
+    def is_valid(self):
+        stack = []
+        for char in self.string:
+            if char in "([{":
+                stack.append(char)
+            elif char in ")]}":
+                if not stack:
+                    return False
+                if char == ")" and stack[-1] != "(":
+                    return False
+                if char == "]" and stack[-1] != "[":
+                    return False
+                if char == "}" and stack[-1] != "{":
+                    return False
+                stack.pop()
+        return not stack
+
+# test the class
+string1 = "()[]{}"
+print(ParenthesesValidator(string1).is_valid()) # True
+
+string2 = "({[)]"
+print(ParenthesesValidator(string2).is_valid()) # False
+
+string3 = "{{{"
+print(ParenthesesValidator(string3).is_valid()) # False
