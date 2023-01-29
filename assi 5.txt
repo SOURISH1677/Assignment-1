@@ -1,8 +1,10 @@
 #Q1
 
-a='sun'
-for i in a[::-1]:
-    print(i,end='')
+a='sunny'
+c=" "
+for i in a[:]:
+    c=i+c
+print(c)
 
 #Q2
 
